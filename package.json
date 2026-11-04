@@ -2,6 +2,8 @@
   "name": "findit-lost-found",
   "private": true,
   "version": "1.0.0",
+  "description": "FindIt @ RIT – Smart Campus Lost & Found Portal",
+  "homepage": "https://findit-lost-found-2026-8x2e.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",
