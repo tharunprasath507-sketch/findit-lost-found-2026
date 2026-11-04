@@ -1,79 +1,90 @@
-# FindIt @ RIT – Smart Campus Lost & Found Portal
+# 🔍 FindIt @ RIT — Smart Campus Lost & Found Portal
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-blue?style=for-the-badge&logo=vercel)](https://findit-lost-found-2026-8x2e.vercel.app/)
-[![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge&logo=vercel)](https://findit-lost-found-2026-8x2e.vercel.app/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-5-purple?style=for-the-badge&logo=vite)](https://vitejs.dev)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-cyan?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
 
-> 🌐 **Live Website URL**: **[https://findit-lost-found-2026-8x2e.vercel.app/](https://findit-lost-found-2026-8x2e.vercel.app/)**
-
-The official smart AI-assisted lost and found portal designed and customized specifically for **Rajalakshmi Institute of Technology (RIT)** campus community.
-
----
-
-## 🌟 Live Portal Highlights
-
-- 🔗 **Deployment**: Hosted on Vercel at [https://findit-lost-found-2026-8x2e.vercel.app/](https://findit-lost-found-2026-8x2e.vercel.app/)
-- 🗺️ **Interactive Campus Map**: Direct building locator across RIT campus (Central Library, CSE Labs, Food Court, Bus Bay, Gate 1 Security).
-- ⚡ **AI Campus Match Engine**: Automatically correlates lost student belongings with items turned into Security Gate 1 with high confidence scores.
-- 🛡️ **Anti-Fraud Secret Question**: Claimants must answer a verification question before claiming property.
-- 📱 **Responsive Design**: Designed with high-performance Tailwind CSS, smooth animations, and mobile drawer navigation.
+> Official AI-assisted Lost & Found portal for the **Rajalakshmi Institute of Technology (RIT)** campus community.
 
 ---
 
-## 🏫 RIT Campus Specific Locations & Hubs
+## 🌐 Live URL
 
-- **Central Library & Digital Knowledge Hub** (2nd Floor Digital Hall & Reading Pods)
-- **CSE & IT Tech Block** (AI/ML Lab 3, IoT Center & Server Room)
-- **Academic Main Block** (Dean Office Lobby & Exam Halls)
-- **Main Food Court & College Canteen** (Dining Tables & Fresh Juice Counter)
-- **College Bus Bay & Parking Zone 2** (Bus Slots 1–40 & Two-Wheeler Bay)
-- **Indoor Sports Arena & Badminton Court** (Sports Complex & Pavilion)
-- **ECE & EEE Department Ground Floor**
-- **Mechanical Sciences CAD/CAM Labs**
-- **Boys & Girls Hostel Blocks** (Block A & Block B Lobbies)
-- **RIT Main Security Gate 1 & Reception** (Official 24/7 Custody Desk & Property Locker)
+**[https://findit-lost-found-2026-8x2e.vercel.app/](https://findit-lost-found-2026-8x2e.vercel.app/)**
 
 ---
 
-## 🎒 Common Campus Property Tracked
-- **Casio Scientific Calculators** (fx-991CW, fx-991EX ClassWiz)
-- **RIT Student Smart ID Cards & Lanyards**
-- **Vehicle & Bike Keys** (Royal Enfield, Yamaha, Scooty keychains)
-- **Earbuds & Headphones** (boAt Airdopes, Noise, OnePlus)
-- **Laboratory Records & Manuals** (Data Structures, Chemistry, Workshop)
-- **Laptop Chargers & Adapters** (Dell, HP, Lenovo 65W Type-C)
+## ✨ Features
+
+- 🏫 **RIT Campus-specific** locations, zones, and safe handover stations
+- 🔍 **AI-powered item matching** (96% confidence showcase)
+- 📋 **Report Lost / Found** items with 3-step wizard
+- 🗺️ **Interactive Campus Map** with 7 building zones
+- 👤 **Student Dashboard** with claim management
+- 🛡️ **Admin / Security Dashboard** with moderation tools
+- 🌙 **Responsive Design** — works on mobile, tablet, and desktop
+- 💬 **Real-time Toast notifications**
 
 ---
 
-## 👥 Demo Logins Included
-- **Tharun Prasath** — `22CS104`, 3rd Year B.E. Computer Science Student (98% Trust Score)
-- **Inspector S. Ramanathan** — Chief Safety Officer at RIT Gate 1 Campus Security Desk
+## 🚀 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18 + JSX |
+| Build Tool | Vite 5 |
+| Styling | Tailwind CSS 3 |
+| Icons | Lucide React |
+| State | React Context API + localStorage |
+| Deployment | Vercel |
 
 ---
 
-## 🛠️ Technology Stack
-- **Framework**: [React.js 18](https://react.dev/)
-- **Build Tool**: [Vite 5](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS 3](https://tailwindcss.com/)
-- **Deployment**: [Vercel](https://vercel.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-
----
-
-## 💻 Local Development
+## 🏃 Run Locally
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Start Vite development server
 npm run dev
 ```
+Open [http://localhost:5173](http://localhost:5173)
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+## 🏗️ Build for Production
+
+```bash
+npm run build
+```
 
 ---
 
-## 📄 License
-This project is licensed under the MIT License.
+## 🔐 Demo Credentials
+
+| Role | Name | Roll No | Password |
+|------|------|---------|----------|
+| Student | Tharun Prasath | 22CS104 | demo123 |
+| Security | Inspector Ramanathan | SEC001 | admin123 |
+
+---
+
+## 📍 RIT Campus Zones
+
+- Main Block (MB) · Library Block (LB) · CSE Department
+- Mechanical Block · Canteen / Food Court · Sports Ground
+- Boys Hostel · Girls Hostel · Gate 1 (Main Entrance)
+
+---
+
+## 📦 Deployment
+
+This project auto-deploys to **Vercel** on every push to `main`.
+
+Configured via [`vercel.json`](./vercel.json):
+- Framework: Vite
+- Build: `npm run build`
+- Output: `dist/`
+- SPA routing: all paths → `index.html`
+
+---
+
+*Made with ❤️ for RIT Campus Community*
