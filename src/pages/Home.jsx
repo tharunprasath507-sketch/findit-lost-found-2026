@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { ItemCard } from '../components/common/ItemCard';
-import { CATEGORIES, HOW_IT_WORKS, PLATFORM_STATS } from '../data/mockData';
+import { CATEGORIES, HOW_IT_WORKS, PLATFORM_STATS, RIT_CAMPUS_ZONES, SAFE_HANDOVER_STATIONS } from '../data/mockData';
 import { 
   Search, 
   MapPin, 
@@ -23,19 +23,29 @@ import {
   HelpCircle,
   TrendingUp,
   Clock,
-  Users
+  Users,
+  Building2,
+  Cpu,
+  BookOpen,
+  Coffee,
+  Bus,
+  Trophy,
+  CheckCircle2,
+  ExternalLink,
+  Calculator,
+  Headphones
 } from 'lucide-react';
 
 const categoryIcons = {
   Layers: Layers,
   Laptop: Laptop,
-  Wallet: Wallet,
-  Key: Key,
-  Briefcase: Briefcase,
   FileText: FileText,
+  Calculator: Calculator,
+  Key: Key,
+  Headphones: Headphones,
+  Wallet: Wallet,
+  Briefcase: Briefcase,
   Watch: Watch,
-  Glasses: Glasses,
-  Heart: Heart,
   HelpCircle: HelpCircle
 };
 
@@ -57,6 +67,22 @@ export const Home = () => {
     });
   };
 
+  const handleQuickKeyword = (keyword) => {
+    navigate('browse', {
+      filters: {
+        query: keyword
+      }
+    });
+  };
+
+  const handleZoneClick = (locationName) => {
+    navigate('browse', {
+      filters: {
+        location: locationName
+      }
+    });
+  };
+
   // Filter items for recent section
   const recentItems = items.filter(item => {
     if (activeTab === 'lost') return item.type === 'lost';
@@ -64,83 +90,105 @@ export const Home = () => {
     return true;
   }).slice(0, 6);
 
+  // Suggested keywords for RIT students
+  const campusSuggestions = [
+    'Casio Calculator',
+    'RIT ID Card',
+    'Bike Key',
+    'Boat Earbuds',
+    'Lab Record',
+    'Laptop Charger'
+  ];
+
   return (
     <div className="space-y-20 pb-16">
       
-      {/* 1. Hero Section */}
+      {/* 1. RIT Campus Hero Section */}
       <section className="relative overflow-hidden hero-pattern pt-12 pb-20 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-5">
-            {/* AI pill tag */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold uppercase tracking-wider shadow-xs animate-pulse">
+            {/* Campus badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-black uppercase tracking-wider shadow-xs animate-pulse">
               <Sparkles className="w-4 h-4 text-brand-600" />
-              <span>Smart AI-Assisted Matching Algorithm</span>
+              <span>Official RIT Campus Lost & Found System</span>
             </div>
 
             {/* Main title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.15]">
-              Lose Something? <br className="hidden sm:inline" />
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.12]">
+              Lost Something at <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-sky-600 to-indigo-600">
-                Let’s Reconnect You Fast.
-              </span>
+                RIT Campus?
+              </span> We’ll Find It.
             </h1>
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              FindIt is the official community lost-and-found portal. Cross-referencing lost reports with found property logs to reunite items safely, quickly, and securely.
+              Connecting students across the <strong>Central Library, CSE Labs, Food Court, Bus Bay, and Gate 1 Security</strong> with instant AI match verification.
             </p>
 
-            {/* Quick Action Buttons */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <button
                 onClick={() => navigate('report-lost')}
-                className="px-6 py-3.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-lost-600 to-amber-600 hover:from-lost-700 hover:to-amber-700 text-white shadow-elevated hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+                className="px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-lost-600 to-amber-600 hover:from-lost-700 hover:to-amber-700 text-white shadow-elevated hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
               >
                 <PlusCircle className="w-4 h-4" />
-                Report a Lost Item
+                Report Lost Item
               </button>
 
               <button
                 onClick={() => navigate('report-found')}
-                className="px-6 py-3.5 rounded-2xl text-sm font-bold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-elevated hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
+                className="px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-elevated hover:shadow-lg transition-all flex items-center gap-2 transform hover:-translate-y-0.5"
               >
                 <CheckCircle className="w-4 h-4" />
-                I Found an Item
+                Turn In Found Property
               </button>
 
               <button
                 onClick={() => navigate('browse')}
-                className="px-6 py-3.5 rounded-2xl text-sm font-bold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shadow-soft transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-black bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shadow-soft transition-all flex items-center gap-2"
               >
-                Browse All Reports
+                Browse Campus Items
                 <ArrowRight className="w-4 h-4 text-slate-400" />
               </button>
             </div>
+
+            {/* Quick Keyword Pills */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
+              <span className="text-slate-400 font-bold">Frequently Lost:</span>
+              {campusSuggestions.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleQuickKeyword(item)}
+                  className="px-3 py-1 rounded-full bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-300 text-slate-600 hover:text-brand-700 font-semibold transition-all shadow-2xs text-[11px]"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Unified Smart Search Card */}
-          <div className="mt-12 max-w-4xl mx-auto bg-white rounded-3xl p-4 sm:p-5 shadow-elevated border border-slate-200/90">
+          {/* Unified Campus Search Card */}
+          <div className="mt-10 max-w-4xl mx-auto bg-white rounded-3xl p-4 sm:p-5 shadow-elevated border border-slate-200/90">
             <form onSubmit={handleHeroSearch} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
               
-              {/* Keyword query */}
               <div className="sm:col-span-5 relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
                 <input
                   type="text"
-                  placeholder="What item are you looking for?"
+                  placeholder="e.g. Casio fx-991, RIT ID card, Dell charger..."
                   value={heroSearch}
                   onChange={(e) => setHeroSearch(e.target.value)}
                   className="w-full pl-10 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition-all text-slate-800"
                 />
               </div>
 
-              {/* Category selector */}
               <div className="sm:col-span-3">
                 <select
                   value={heroCategory}
                   onChange={(e) => setHeroCategory(e.target.value)}
-                  className="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none text-slate-700 transition-all cursor-pointer"
+                  className="w-full px-3 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 outline-none text-slate-700 cursor-pointer"
                 >
                   {CATEGORIES.map(cat => (
                     <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -148,23 +196,21 @@ export const Home = () => {
                 </select>
               </div>
 
-              {/* Location input */}
               <div className="sm:col-span-2 relative">
                 <MapPin className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
                 <input
                   type="text"
-                  placeholder="Location / Zone"
+                  placeholder="Campus Zone"
                   value={heroLocation}
                   onChange={(e) => setHeroLocation(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition-all text-slate-800"
+                  className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 outline-none text-slate-800"
                 />
               </div>
 
-              {/* Search button */}
               <div className="sm:col-span-2">
                 <button
                   type="submit"
-                  className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md transition-all flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-black bg-brand-600 hover:bg-brand-700 text-white shadow-md transition-all flex items-center justify-center gap-1.5"
                 >
                   <Search className="w-4 h-4" />
                   Search
@@ -173,56 +219,103 @@ export const Home = () => {
             </form>
           </div>
 
+          {/* RIT Campus Hotspots Live Ticker */}
+          <div className="mt-12 max-w-5xl mx-auto">
+            <div className="flex items-center justify-between mb-3 px-1">
+              <span className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-brand-600" />
+                Popular RIT Campus Hotspots (Click to view items)
+              </span>
+              <button 
+                onClick={() => navigate('browse')}
+                className="text-xs font-bold text-brand-600 hover:underline"
+              >
+                View all zones →
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {[
+                { name: 'Central Library', query: 'Central Library', count: 2, icon: BookOpen, color: 'text-indigo-600 bg-indigo-50' },
+                { name: 'CSE & IT Labs', query: 'CSE', count: 2, icon: Cpu, color: 'text-sky-600 bg-sky-50' },
+                { name: 'Food Court', query: 'Food Court', count: 2, icon: Coffee, color: 'text-amber-600 bg-amber-50' },
+                { name: 'College Bus Bay', query: 'Bus Bay', count: 1, icon: Bus, color: 'text-rose-600 bg-rose-50' },
+                { name: 'Gate 1 Security', query: 'Gate 1', count: 1, icon: ShieldCheck, color: 'text-slate-700 bg-slate-100' }
+              ].map((spot) => {
+                const Icon = spot.icon;
+                return (
+                  <div
+                    key={spot.name}
+                    onClick={() => handleZoneClick(spot.query)}
+                    className="p-3.5 bg-white rounded-2xl border border-slate-200/80 hover:border-brand-400 hover:shadow-soft transition-all cursor-pointer group flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${spot.color}`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-black text-slate-900 group-hover:text-brand-600 transition-colors truncate">
+                          {spot.name}
+                        </p>
+                        <p className="text-[10px] text-slate-400 font-semibold">{spot.count} reported</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Impact Stats Counter Bar */}
-          <div className="mt-14 max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-12 max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-soft text-center">
               <div className="flex items-center justify-center w-10 h-10 mx-auto rounded-xl bg-blue-50 text-brand-600 mb-2">
                 <TrendingUp className="w-5 h-5" />
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">{PLATFORM_STATS.totalReported}+</p>
-              <p className="text-xs font-medium text-slate-500 mt-0.5">Total Items Reported</p>
+              <p className="text-2xl sm:text-3xl font-black text-slate-900">{PLATFORM_STATS.totalReported}+</p>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">Total RIT Reports</p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-soft text-center">
               <div className="flex items-center justify-center w-10 h-10 mx-auto rounded-xl bg-emerald-50 text-emerald-600 mb-2">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold text-emerald-600">{PLATFORM_STATS.reunitedTotal}+</p>
-              <p className="text-xs font-medium text-slate-500 mt-0.5">Safely Reunited</p>
+              <p className="text-2xl sm:text-3xl font-black text-emerald-600">{PLATFORM_STATS.reunitedTotal}+</p>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">Safely Returned to Students</p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-soft text-center">
               <div className="flex items-center justify-center w-10 h-10 mx-auto rounded-xl bg-amber-50 text-amber-600 mb-2">
                 <Award className="w-5 h-5" />
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">{PLATFORM_STATS.successRate}</p>
-              <p className="text-xs font-medium text-slate-500 mt-0.5">Community Recovery Rate</p>
+              <p className="text-2xl sm:text-3xl font-black text-slate-900">{PLATFORM_STATS.successRate}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">Campus Recovery Rate</p>
             </div>
 
             <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-soft text-center">
               <div className="flex items-center justify-center w-10 h-10 mx-auto rounded-xl bg-indigo-50 text-indigo-600 mb-2">
                 <Clock className="w-5 h-5" />
               </div>
-              <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">{PLATFORM_STATS.avgReunionHours}</p>
-              <p className="text-xs font-medium text-slate-500 mt-0.5">Average Turnaround Time</p>
+              <p className="text-2xl sm:text-3xl font-black text-slate-900">{PLATFORM_STATS.avgReunionHours}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-0.5">Average Turnaround Time</p>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 2. Recent Lost & Found Reports */}
+      {/* 2. Live Campus Feed */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md mb-2">
-              <Clock className="w-3.5 h-3.5" /> Live Feed
+            <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-brand-600 bg-brand-50 px-2.5 py-1 rounded-md mb-2">
+              <Clock className="w-3.5 h-3.5" /> Live RIT Property Log
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Recently Reported Items
+              Recently Reported Belongings
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Check if an item you lost was recently logged or help spot an owner.
+              Check if an item lost in classrooms or canteens has been turned in today.
             </p>
           </div>
 
@@ -230,7 +323,7 @@ export const Home = () => {
           <div className="flex items-center p-1 bg-slate-100 rounded-xl self-start sm:self-auto border border-slate-200">
             <button
               onClick={() => setActiveTab('all')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all ${
                 activeTab === 'all' 
                   ? 'bg-white text-slate-900 shadow-xs' 
                   : 'text-slate-600 hover:text-slate-900'
@@ -240,7 +333,7 @@ export const Home = () => {
             </button>
             <button
               onClick={() => setActiveTab('lost')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all ${
                 activeTab === 'lost' 
                   ? 'bg-amber-500 text-white shadow-xs' 
                   : 'text-slate-600 hover:text-amber-600'
@@ -250,7 +343,7 @@ export const Home = () => {
             </button>
             <button
               onClick={() => setActiveTab('found')}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-black transition-all ${
                 activeTab === 'found' 
                   ? 'bg-emerald-600 text-white shadow-xs' 
                   : 'text-slate-600 hover:text-emerald-600'
@@ -268,29 +361,84 @@ export const Home = () => {
           ))}
         </div>
 
-        {/* Browse more link */}
+        {/* Explore More CTA */}
         <div className="text-center mt-10">
           <button
             onClick={() => navigate('browse')}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-bold bg-slate-900 text-white hover:bg-brand-600 transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-black bg-slate-900 text-white hover:bg-brand-600 transition-colors shadow-sm"
           >
-            Explore All Items ({items.length}) <ArrowRight className="w-4 h-4" />
+            Explore All Campus Reports ({items.length}) <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </section>
 
-      {/* 3. How FindIt Works (Visual Process Pipeline) */}
+      {/* 3. Live AI Match Radar Showcase */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-elevated border border-slate-800">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-xl">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30">
+                <Sparkles className="w-4 h-4 text-amber-400" />
+                Live Campus AI Match Engine
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug">
+                How Our Algorithm Linked Tharun's Calculator in Minutes.
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                When Tharun logged a lost Casio fx-991CW in Academic Block Exam Hall 204, FindIt automatically matched it against property submitted to Security Desk Gate 1 based on timestamp and serial tags.
+              </p>
+              <div className="pt-2 flex items-center gap-3">
+                <button
+                  onClick={() => navigate('item-details', { itemId: 'rit-101' })}
+                  className="px-5 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-500 text-white transition-colors flex items-center gap-1.5 shadow-md"
+                >
+                  Inspect Match Case <ExternalLink className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Visual Match Comparison Box */}
+            <div className="w-full lg:w-96 bg-white/10 backdrop-blur-md rounded-2xl border border-white/10 p-5 space-y-3">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                <span className="text-xs font-bold text-slate-300">Match Correlation</span>
+                <span className="text-xs font-black text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-400/30">
+                  96% Confidence
+                </span>
+              </div>
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between text-slate-300">
+                  <span>Category:</span>
+                  <span className="font-bold text-white">Calculators & Stationary ✓</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Location Vicinity:</span>
+                  <span className="font-bold text-white">Academic Block 204 ✓</span>
+                </div>
+                <div className="flex justify-between text-slate-300">
+                  <span>Time Gap:</span>
+                  <span className="font-bold text-white">45 minutes ✓</span>
+                </div>
+              </div>
+              <div className="pt-2 border-t border-white/10 text-[11px] text-amber-300 flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5" /> Handover held safely at Gate 1
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. How FindIt Works (4-Step Student Workflow) */}
       <section className="bg-slate-100/70 border-y border-slate-200 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-100/60 px-3 py-1 rounded-full">
-              Seamless Workflow
+            <span className="text-xs font-black uppercase tracking-wider text-brand-600 bg-brand-100/60 px-3 py-1 rounded-full">
+              RIT Student Guide
             </span>
             <h2 className="text-3xl font-black text-slate-900 tracking-tight">
-              How FindIt Smart Portal Works
+              4 Steps to Recover Belongings on Campus
             </h2>
             <p className="text-sm text-slate-600">
-              A secure, verified four-step architecture designed to stop fraudulent claims and reunite owners with peace of mind.
+              Designed specifically for college students to ensure items are quickly returned and never misappropriated.
             </p>
           </div>
 
@@ -309,12 +457,12 @@ export const Home = () => {
                       <Sparkles className="w-5 h-5" />
                     </div>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">{step.title}</h3>
+                  <h3 className="text-base font-black text-slate-900 mb-2">{step.title}</h3>
                   <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-semibold text-brand-600">
-                  Step {idx + 1} of 4
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-[11px] font-bold text-brand-600">
+                  Phase {idx + 1} of 4
                 </div>
               </div>
             ))}
@@ -322,73 +470,37 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* 4. Browse by Category */}
+      {/* 5. Safe Handover Points Across RIT */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+            <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            Verified Campus Drop Stations
+          </div>
           <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Explore by Category
+            Official RIT Safe Handover Points
           </h2>
           <p className="text-xs sm:text-sm text-slate-500">
-            Select a category to filter through all reported belongings.
+            Never meet strangers in unlit zones. Use these official college desks for secure exchanges.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {CATEGORIES.filter(c => c.id !== 'all').map((cat) => {
-            const Icon = categoryIcons[cat.icon] || HelpCircle;
-            const count = items.filter(i => i.category === cat.id).length;
-            return (
-              <div
-                key={cat.id}
-                onClick={() => navigate('browse', { filters: { category: cat.id } })}
-                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-brand-500 hover:shadow-elevated transition-all cursor-pointer group text-center flex flex-col items-center justify-center gap-3"
-              >
-                <div className="w-12 h-12 rounded-xl bg-slate-50 group-hover:bg-brand-50 text-slate-600 group-hover:text-brand-600 transition-colors flex items-center justify-center">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 group-hover:text-brand-600 transition-colors">
-                    {cat.name}
-                  </h4>
-                  <p className="text-[11px] font-medium text-slate-400 mt-0.5">
-                    {count} active reports
-                  </p>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {SAFE_HANDOVER_STATIONS.map((st) => (
+            <div key={st.name} className="bg-white rounded-3xl p-6 border border-slate-200 shadow-soft space-y-4">
+              <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center font-black">
+                <Building2 className="w-5 h-5" />
               </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 5. Safe Handover Callout Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white rounded-3xl p-8 sm:p-12 shadow-elevated border border-slate-800 relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 text-xs font-bold border border-brand-400/30">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              Certified Safe Exchange Protocol
+              <div>
+                <h3 className="text-sm font-black text-slate-900">{st.name}</h3>
+                <p className="text-xs text-slate-500 mt-1">{st.landmark}</p>
+              </div>
+              <div className="pt-3 border-t border-slate-100 space-y-1 text-xs">
+                <p className="font-semibold text-slate-700">🕒 {st.timing}</p>
+                <p className="font-semibold text-brand-600">📞 {st.contact}</p>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug">
-              Safety First: Never Meet Unverified Strangers Alone.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Use our certified Campus Safety desks or designated municipal security booths for item handovers. FindIt provides verifiable handoff receipts and verification codes for both parties.
-            </p>
-            <div className="pt-2 flex flex-wrap gap-3">
-              <button
-                onClick={() => navigate('browse')}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-white text-slate-900 hover:bg-slate-100 transition-colors"
-              >
-                Learn Safety Guidelines
-              </button>
-              <button
-                onClick={() => navigate('report-found')}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-brand-600 hover:bg-brand-500 text-white transition-colors"
-              >
-                Drop Off Found Property
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 

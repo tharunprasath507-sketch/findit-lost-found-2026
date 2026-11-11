@@ -12,7 +12,8 @@ import {
   ArrowRight, 
   Sparkles,
   Building2,
-  CheckCircle2
+  CheckCircle2,
+  GraduationCap
 } from 'lucide-react';
 
 export const Auth = () => {
@@ -25,7 +26,8 @@ export const Auth = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [department, setDepartment] = useState('');
+  const [rollNo, setRollNo] = useState('');
+  const [department, setDepartment] = useState('CSE');
   const [role, setRole] = useState('user'); // 'user' | 'admin'
 
   const handleSubmit = (e) => {
@@ -51,24 +53,24 @@ export const Auth = () => {
         
         {/* Left Side: Brand highlights */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-bold">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-black">
             <Sparkles className="w-3.5 h-3.5" />
-            Verified Lost & Found Network
+            RIT Campus Single Sign-On
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-            One Secure Account for All Your Recovery Needs.
+            Recover Items Across All RIT Blocks.
           </h1>
 
           <p className="text-sm text-slate-600 leading-relaxed">
-            Report items in seconds, receive automated AI match notifications when identical belongings are found, and communicate safely with certified campus safety officers.
+            Sign in with your RIT student roll number or institutional email. Receive real-time AI match alerts when calculators, ID cards, or keys are turned in at Campus Security Gate 1.
           </p>
 
           {/* Quick Demo Login Cards */}
           <div className="bg-slate-100/80 p-5 rounded-2xl border border-slate-200/80 space-y-3">
-            <p className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+            <p className="text-xs font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-brand-600" />
-              1-Click Instant Demo Logins:
+              1-Click RIT Campus Demo Logins:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button
@@ -77,12 +79,12 @@ export const Auth = () => {
                 className="p-3 bg-white hover:bg-brand-50 border border-slate-200 hover:border-brand-300 rounded-xl text-left transition-all group"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-blue-100 text-brand-700 flex items-center justify-center text-xs font-bold">
-                    U
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 text-brand-700 flex items-center justify-center text-xs font-black">
+                    TP
                   </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-900 group-hover:text-brand-700">Alex Rivera</p>
-                    <p className="text-[10px] text-slate-500">Student / User</p>
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-slate-900 group-hover:text-brand-700 truncate">Tharun Prasath</p>
+                    <p className="text-[10px] text-slate-500 font-semibold">22CS104 (CSE)</p>
                   </div>
                 </div>
               </button>
@@ -93,12 +95,12 @@ export const Auth = () => {
                 className="p-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-400 rounded-xl text-left transition-all group"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center text-xs font-bold">
-                    A
+                  <div className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-xs font-black">
+                    SR
                   </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-900">Officer Jenkins</p>
-                    <p className="text-[10px] text-slate-500">Admin / Security</p>
+                  <div className="min-w-0">
+                    <p className="text-xs font-black text-slate-900 truncate">Insp. Ramanathan</p>
+                    <p className="text-[10px] text-slate-500 font-semibold">Gate 1 Security Head</p>
                   </div>
                 </div>
               </button>
@@ -108,11 +110,11 @@ export const Auth = () => {
           <div className="space-y-2 text-xs text-slate-500">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-              <span>Encrypted verification answering to prevent false claims</span>
+              <span>Direct integration with RIT Gate 1 Lost Property Lockers</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-              <span>Real-time notifications when a match is found</span>
+              <span>Secret anti-fraud verification question prevents mistaken handovers</span>
             </div>
           </div>
         </div>
@@ -126,26 +128,25 @@ export const Auth = () => {
               <button
                 type="button"
                 onClick={() => setIsLogin(true)}
-                className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
                   isLogin ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                Sign In
+                RIT Student Sign In
               </button>
               <button
                 type="button"
                 onClick={() => setIsLogin(false)}
-                className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                className={`flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all ${
                   !isLogin ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                Create Account
+                New Registration
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               
-              {/* If registering, show extra fields */}
               {!isLogin && (
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -156,7 +157,7 @@ export const Auth = () => {
                         <input
                           type="text"
                           required
-                          placeholder="e.g. Maya Chen"
+                          placeholder="e.g. Tharun Prasath"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -165,15 +166,15 @@ export const Auth = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Phone Number</label>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Roll Number / Staff ID</label>
                       <div className="relative">
-                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                        <GraduationCap className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                         <input
-                          type="tel"
-                          placeholder="+1 (555) 000-0000"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                          type="text"
+                          placeholder="e.g. 22CS104"
+                          value={rollNo}
+                          onChange={(e) => setRollNo(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none uppercase"
                         />
                       </div>
                     </div>
@@ -181,29 +182,34 @@ export const Auth = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Department / Campus Role</label>
-                      <div className="relative">
-                        <Building2 className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-                        <input
-                          type="text"
-                          placeholder="e.g. Science / Resident"
-                          value={department}
-                          onChange={(e) => setDepartment(e.target.value)}
-                          className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
-                        />
-                      </div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Department</label>
+                      <select
+                        value={department}
+                        onChange={(e) => setDepartment(e.target.value)}
+                        className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                      >
+                        <option value="CSE">Computer Science & Engineering (CSE)</option>
+                        <option value="IT">Information Technology (IT)</option>
+                        <option value="AIDS">Artificial Intelligence & Data Science</option>
+                        <option value="ECE">Electronics & Communication (ECE)</option>
+                        <option value="MECH">Mechanical Engineering</option>
+                        <option value="EEE">Electrical & Electronics (EEE)</option>
+                        <option value="BIOMED">Biomedical Engineering</option>
+                      </select>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Account Role</label>
-                      <select
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                        className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
-                      >
-                        <option value="user">Student / Community Member</option>
-                        <option value="admin">Campus Safety / Staff Officer</option>
-                      </select>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">Phone Number</label>
+                      <div className="relative">
+                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+                        <input
+                          type="tel"
+                          placeholder="+91 98401 23456"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                        />
+                      </div>
                     </div>
                   </div>
                 </>
@@ -211,13 +217,13 @@ export const Auth = () => {
 
               {/* Email */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">Email Address</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">College Email / Username</label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
                   <input
                     type="email"
                     required
-                    placeholder="name@university.edu or email@domain.com"
+                    placeholder="rollno@rit-campus.ac.in or personal email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -232,8 +238,8 @@ export const Auth = () => {
                   {isLogin && (
                     <button
                       type="button"
-                      onClick={() => showToast('Password reset link simulated to your email', 'info')}
-                      className="text-[11px] font-semibold text-brand-600 hover:underline"
+                      onClick={() => showToast('Password reset link sent to your college email', 'info')}
+                      className="text-[11px] font-bold text-brand-600 hover:underline"
                     >
                       Forgot password?
                     </button>
@@ -259,7 +265,7 @@ export const Auth = () => {
                 </div>
               </div>
 
-              {/* Remember me checkbox */}
+              {/* Remember me */}
               {isLogin && (
                 <div className="flex items-center gap-2 pt-1">
                   <input
@@ -268,8 +274,8 @@ export const Auth = () => {
                     defaultChecked
                     className="w-4 h-4 rounded text-brand-600 border-slate-300 focus:ring-brand-500"
                   />
-                  <label htmlFor="remember" className="text-xs text-slate-600">
-                    Keep me signed in for 30 days
+                  <label htmlFor="remember" className="text-xs text-slate-600 font-medium">
+                    Keep me signed in on this campus device
                   </label>
                 </div>
               )}
@@ -277,18 +283,18 @@ export const Auth = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full mt-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="w-full mt-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-black bg-brand-600 hover:bg-brand-700 text-white shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
-                <span>{isLogin ? 'Sign In to Portal' : 'Complete Registration'}</span>
+                <span>{isLogin ? 'Sign In to RIT Portal' : 'Register Student Account'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <p className="text-center text-xs text-slate-500 pt-3">
-                {isLogin ? "Don't have an account yet? " : "Already have an account? "}
+                {isLogin ? "New student or staff? " : "Already registered? "}
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
-                  className="font-bold text-brand-600 hover:underline"
+                  className="font-black text-brand-600 hover:underline"
                 >
                   {isLogin ? 'Register now' : 'Sign In'}
                 </button>

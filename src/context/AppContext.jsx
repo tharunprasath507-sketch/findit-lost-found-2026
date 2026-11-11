@@ -10,33 +10,33 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [items, setItems] = useState(() => {
-    const saved = localStorage.getItem('findit_items');
+    const saved = localStorage.getItem('findit_rit_items_v2');
     return saved ? JSON.parse(saved) : INITIAL_ITEMS;
   });
 
   const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('findit_user');
-    return saved ? JSON.parse(saved) : INITIAL_USERS[0]; // Default: Alex Rivera (user)
+    const saved = localStorage.getItem('findit_rit_user_v2');
+    return saved ? JSON.parse(saved) : INITIAL_USERS[0]; // Default: Tharun Prasath (Student)
   });
 
   const [claims, setClaims] = useState(() => {
-    const saved = localStorage.getItem('findit_claims');
+    const saved = localStorage.getItem('findit_rit_claims_v2');
     return saved ? JSON.parse(saved) : INITIAL_CLAIMS;
   });
 
   const [notifications, setNotifications] = useState(() => {
-    const saved = localStorage.getItem('findit_notifs');
+    const saved = localStorage.getItem('findit_rit_notifs_v2');
     return saved ? JSON.parse(saved) : INITIAL_NOTIFICATIONS;
   });
 
   const [savedItemIds, setSavedItemIds] = useState(() => {
-    const saved = localStorage.getItem('findit_saved');
-    return saved ? JSON.parse(saved) : ['item-101', 'item-202'];
+    const saved = localStorage.getItem('findit_rit_saved_v2');
+    return saved ? JSON.parse(saved) : ['rit-101', 'rit-202'];
   });
 
   // Navigation State
   const [currentPage, setCurrentPage] = useState('home');
-  const [selectedItemId, setSelectedItemId] = useState('item-101');
+  const [selectedItemId, setSelectedItemId] = useState('rit-101');
   const [authMode, setAuthMode] = useState('login'); // 'login' | 'register'
 
   // Global Search & Filter State
@@ -55,23 +55,23 @@ export const AppProvider = ({ children }) => {
 
   // Sync to localStorage
   useEffect(() => {
-    localStorage.setItem('findit_items', JSON.stringify(items));
+    localStorage.setItem('findit_rit_items_v2', JSON.stringify(items));
   }, [items]);
 
   useEffect(() => {
-    localStorage.setItem('findit_user', JSON.stringify(currentUser));
+    localStorage.setItem('findit_rit_user_v2', JSON.stringify(currentUser));
   }, [currentUser]);
 
   useEffect(() => {
-    localStorage.setItem('findit_claims', JSON.stringify(claims));
+    localStorage.setItem('findit_rit_claims_v2', JSON.stringify(claims));
   }, [claims]);
 
   useEffect(() => {
-    localStorage.setItem('findit_notifs', JSON.stringify(notifications));
+    localStorage.setItem('findit_rit_notifs_v2', JSON.stringify(notifications));
   }, [notifications]);
 
   useEffect(() => {
-    localStorage.setItem('findit_saved', JSON.stringify(savedItemIds));
+    localStorage.setItem('findit_rit_saved_v2', JSON.stringify(savedItemIds));
   }, [savedItemIds]);
 
   const showToast = (message, type = 'success') => {
@@ -230,10 +230,10 @@ export const AppProvider = ({ children }) => {
   const switchUserRole = (targetRole) => {
     if (targetRole === 'admin') {
       setCurrentUser(INITIAL_USERS[1]);
-      showToast('Switched to Admin Officer Sarah Jenkins mode', 'info');
+      showToast('Switched to RIT Security Officer Ramanathan mode', 'info');
     } else {
       setCurrentUser(INITIAL_USERS[0]);
-      showToast('Switched to Regular User Alex Rivera mode', 'info');
+      showToast('Switched to RIT Student Tharun Prasath mode', 'info');
     }
   };
 

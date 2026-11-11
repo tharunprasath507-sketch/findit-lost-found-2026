@@ -8,21 +8,18 @@ import {
   Clock, 
   Upload, 
   Award, 
-  AlertCircle, 
   ArrowRight, 
-  CheckCircle2, 
   Sparkles,
-  Image as ImageIcon,
-  Shield,
-  HelpCircle
+  Building2,
+  GraduationCap
 } from 'lucide-react';
 
 const SAMPLE_LOST_IMAGES = [
-  'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80'
+  'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=800&q=80', // Calculator
+  'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80', // ID Card
+  'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80', // Earbuds
+  'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80', // Lab Record
+  'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80'  // Laptop
 ];
 
 export const ReportLost = () => {
@@ -30,16 +27,16 @@ export const ReportLost = () => {
 
   const [formData, setFormData] = useState({
     title: '',
-    category: 'electronics',
+    category: 'calculators',
     brand: '',
     color: '',
     date: new Date().toISOString().split('T')[0],
-    time: '14:00',
+    time: '13:00',
     location: LOCATIONS[0],
     customLocation: '',
     description: '',
     serialMasked: '',
-    reward: 0,
+    reward: 100,
     urgency: 'high',
     image: SAMPLE_LOST_IMAGES[0]
   });
@@ -99,30 +96,30 @@ export const ReportLost = () => {
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-black">
           <PlusCircle className="w-4 h-4 text-amber-600" />
-          Official Loss Report Form
+          RIT Campus Loss Declaration Form
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          Report a Lost Item
+          Report a Lost Belonging
         </h1>
         <p className="text-xs sm:text-sm text-slate-500">
-          Our smart system will instantly search our database of turned-in items and alert campus safety staff.
+          Cross-referenced immediately across RIT Security Desk logs, Central Library, and hostel managers.
         </p>
       </div>
 
       {/* Progress Steps */}
       <div className="flex items-center justify-between max-w-xl mx-auto px-4">
         {[
-          { step: 1, label: 'Item Details' },
-          { step: 2, label: 'Loss Info' },
-          { step: 3, label: 'Photos & Reward' }
+          { step: 1, label: 'Item Identification' },
+          { step: 2, label: 'Campus Zone & Time' },
+          { step: 3, label: 'Photo & Reward' }
         ].map((s) => (
           <div key={s.step} className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setActiveStep(s.step)}
-              className={`w-8 h-8 rounded-full text-xs font-bold flex items-center justify-center transition-all ${
+              className={`w-8 h-8 rounded-full text-xs font-black flex items-center justify-center transition-all ${
                 activeStep === s.step
                   ? 'bg-brand-600 text-white ring-4 ring-brand-100'
                   : activeStep > s.step
@@ -132,7 +129,7 @@ export const ReportLost = () => {
             >
               {activeStep > s.step ? '✓' : s.step}
             </button>
-            <span className={`text-xs font-semibold hidden sm:inline ${
+            <span className={`text-xs font-bold hidden sm:inline ${
               activeStep === s.step ? 'text-slate-900' : 'text-slate-400'
             }`}>
               {s.label}
@@ -148,19 +145,19 @@ export const ReportLost = () => {
         {activeStep === 1 && (
           <div className="space-y-5 animate-fade-in">
             <div className="border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Step 1: Item Identification</h3>
-              <p className="text-xs text-slate-500">Provide general details so people can distinguish your property.</p>
+              <h3 className="text-base font-black text-slate-900">Step 1: Item Details</h3>
+              <p className="text-xs text-slate-500">Specify details so fellow RIT students or faculty can identify it.</p>
             </div>
 
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                Item Title / Name <span className="text-rose-500">*</span>
+                Item Title <span className="text-rose-500">*</span>
               </label>
               <input
                 type="text"
                 required
                 name="title"
-                placeholder="e.g. MacBook Pro 14-inch Space Grey with Stickers"
+                placeholder="e.g. Casio fx-991CW Calculator with blue sticker"
                 value={formData.title}
                 onChange={handleChange}
                 className="w-full px-4 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -174,7 +171,7 @@ export const ReportLost = () => {
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none font-semibold text-slate-700"
                 >
                   {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
                     <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -183,11 +180,11 @@ export const ReportLost = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">Brand / Manufacturer</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">Brand / Make</label>
                 <input
                   type="text"
                   name="brand"
-                  placeholder="e.g. Apple, Bellroy, Sony, Nike"
+                  placeholder="e.g. Casio, Dell, boAt, Royal Enfield"
                   value={formData.brand}
                   onChange={handleChange}
                   className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -201,7 +198,7 @@ export const ReportLost = () => {
                 <input
                   type="text"
                   name="color"
-                  placeholder="e.g. Matte Black / Silver"
+                  placeholder="e.g. Black / Maroon"
                   value={formData.color}
                   onChange={handleChange}
                   className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -210,12 +207,12 @@ export const ReportLost = () => {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                  Masked Serial Number / IMEI (Optional)
+                  Masked Serial / Roll Number on Item
                 </label>
                 <input
                   type="text"
                   name="serialMasked"
-                  placeholder="e.g. C02G****MD6T"
+                  placeholder="e.g. 22CS104 or 991CW-****"
                   value={formData.serialMasked}
                   onChange={handleChange}
                   className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -233,20 +230,20 @@ export const ReportLost = () => {
                   }
                   setActiveStep(2);
                 }}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-700 text-white shadow-md flex items-center gap-1.5"
               >
-                Next: Loss Details <ArrowRight className="w-4 h-4" />
+                Next: Campus Zone & Time <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
         )}
 
-        {/* STEP 2: Loss Circumstances */}
+        {/* STEP 2: Campus Zone & Loss Info */}
         {activeStep === 2 && (
           <div className="space-y-5 animate-fade-in">
             <div className="border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Step 2: When & Where Was It Lost?</h3>
-              <p className="text-xs text-slate-500">Accurate locations speed up cross-matching with security logs.</p>
+              <h3 className="text-base font-black text-slate-900">Step 2: When & Where in RIT?</h3>
+              <p className="text-xs text-slate-500">Pinpointing the classroom, lab, or bus bay slot speeds up finding it.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -260,29 +257,29 @@ export const ReportLost = () => {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none font-semibold text-slate-700"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1.5">Approximate Time</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">Class Period / Time</label>
                 <input
                   type="time"
                   name="time"
                   value={formData.time}
                   onChange={handleChange}
-                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none font-semibold text-slate-700"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1.5">Primary Zone / Facility</label>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">RIT Campus Zone / Building</label>
               <select
                 name="location"
                 value={formData.location}
                 onChange={handleChange}
-                className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none font-semibold text-slate-700"
               >
                 {LOCATIONS.map(loc => (
                   <option key={loc} value={loc}>{loc}</option>
@@ -292,12 +289,12 @@ export const ReportLost = () => {
 
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                Specific Spot / Room / Landmark (Optional)
+                Specific Room, Desk, or Bus Number (Optional)
               </label>
               <input
                 type="text"
                 name="customLocation"
-                placeholder="e.g. Desk #14 near second floor quiet reading window"
+                placeholder="e.g. Exam Hall 204 Desk 14, or Bus 12 middle row"
                 value={formData.customLocation}
                 onChange={handleChange}
                 className="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -312,7 +309,7 @@ export const ReportLost = () => {
                 required
                 rows={4}
                 name="description"
-                placeholder="Include scratches, stickers, keychain contents, phone wallpaper or case details..."
+                placeholder="Include scratches, stickers, roll numbers written on top, battery conditions..."
                 value={formData.description}
                 onChange={handleChange}
                 className="w-full p-3.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
@@ -336,7 +333,7 @@ export const ReportLost = () => {
                   }
                   setActiveStep(3);
                 }}
-                className="px-6 py-2.5 rounded-xl text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white shadow-md flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl text-xs font-black bg-brand-600 hover:bg-brand-700 text-white shadow-md flex items-center gap-1.5"
               >
                 Next: Photo & Reward <ArrowRight className="w-4 h-4" />
               </button>
@@ -348,11 +345,10 @@ export const ReportLost = () => {
         {activeStep === 3 && (
           <div className="space-y-6 animate-fade-in">
             <div className="border-b border-slate-100 pb-3">
-              <h3 className="text-base font-bold text-slate-900">Step 3: Item Photo, Urgency & Reward</h3>
-              <p className="text-xs text-slate-500">Adding a photo and optional reward increases recovery speed by 70%.</p>
+              <h3 className="text-base font-black text-slate-900">Step 3: Item Photo & Recovery Incentive</h3>
+              <p className="text-xs text-slate-500">Pick a catalog sample or upload a photo.</p>
             </div>
 
-            {/* Photo preview & sample selector */}
             <div>
               <label className="block text-xs font-bold text-slate-700 mb-2">Item Photo</label>
               <div className="flex flex-col sm:flex-row gap-5 items-center">
@@ -374,7 +370,7 @@ export const ReportLost = () => {
                   </div>
 
                   <div>
-                    <p className="text-[11px] font-semibold text-slate-500 mb-1.5">Or pick a sample catalog image:</p>
+                    <p className="text-[11px] font-bold text-slate-500 mb-1.5">Or choose a campus catalog image:</p>
                     <div className="flex gap-2 flex-wrap">
                       {SAMPLE_LOST_IMAGES.map((img, i) => (
                         <button
@@ -408,7 +404,7 @@ export const ReportLost = () => {
                       key={lvl.id}
                       type="button"
                       onClick={() => setFormData(p => ({ ...p, urgency: lvl.id }))}
-                      className={`py-2 px-3 rounded-xl text-xs font-bold capitalize transition-all ${
+                      className={`py-2 px-3 rounded-xl text-xs font-black capitalize transition-all ${
                         formData.urgency === lvl.id
                           ? 'bg-amber-500 text-white shadow-xs'
                           : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
@@ -422,19 +418,19 @@ export const ReportLost = () => {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                  Optional Cash Reward ($ USD)
+                  Optional Cash Reward (₹ INR)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3.5 top-2.5 text-xs font-bold text-slate-400">$</span>
+                  <span className="absolute left-3.5 top-2.5 text-xs font-black text-slate-400">₹</span>
                   <input
                     type="number"
                     min="0"
-                    step="5"
+                    step="50"
                     name="reward"
-                    placeholder="0"
+                    placeholder="100"
                     value={formData.reward}
                     onChange={handleChange}
-                    className="w-full pl-8 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none"
+                    className="w-full pl-8 pr-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none font-bold"
                   />
                 </div>
               </div>
@@ -450,10 +446,10 @@ export const ReportLost = () => {
               </button>
               <button
                 type="submit"
-                className="px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-lost-600 to-amber-600 hover:from-lost-700 hover:to-amber-700 text-white shadow-elevated flex items-center gap-2"
+                className="px-7 py-3 rounded-xl text-xs sm:text-sm font-black bg-gradient-to-r from-lost-600 to-amber-600 hover:from-lost-700 hover:to-amber-700 text-white shadow-elevated flex items-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-amber-200" />
-                Publish Lost Item Report
+                Publish to RIT Campus Feed
               </button>
             </div>
           </div>

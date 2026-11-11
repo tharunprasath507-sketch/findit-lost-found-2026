@@ -14,7 +14,8 @@ import {
   PlusCircle, 
   CheckCircle, 
   Sparkles,
-  Award
+  Award,
+  Building2
 } from 'lucide-react';
 
 export const BrowseItems = () => {
@@ -93,7 +94,6 @@ export const BrowseItems = () => {
         const score = (it) => (it.urgency === 'high' ? 3 : it.urgency === 'normal' ? 2 : 1);
         return score(b) - score(a);
       }
-      // Newest default
       return new Date(b.date) - new Date(a.date);
     });
   }, [items, filterState]);
@@ -113,29 +113,29 @@ export const BrowseItems = () => {
       <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-soft">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-black mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              Live Directory
+              RIT Campus Directory
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Browse Lost & Found Items
+              Browse Lost & Found Belongings
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Search by keyword, filter by zone or category, and match up with items turned in today.
+              Cross-reference property reported across RIT Academic Blocks, Labs, Library, and Gate 1.
             </p>
           </div>
 
           <div className="flex items-center gap-3 self-start md:self-auto">
             <button
               onClick={() => navigate('report-lost')}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-lost-50 text-lost-700 border border-lost-100 hover:bg-lost-100 transition-colors flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2.5 rounded-xl text-xs font-black bg-lost-50 text-lost-700 border border-lost-200/80 hover:bg-lost-100 transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <PlusCircle className="w-4 h-4 text-lost-600" />
               Report Lost
             </button>
             <button
               onClick={() => navigate('report-found')}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-found-50 text-found-700 border border-found-100 hover:bg-found-100 transition-colors flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2.5 rounded-xl text-xs font-black bg-found-50 text-found-700 border border-found-200/80 hover:bg-found-100 transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <CheckCircle className="w-4 h-4 text-found-600" />
               Report Found
@@ -151,7 +151,7 @@ export const BrowseItems = () => {
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
               type="text"
-              placeholder="Search by item name, color, brand, or model..."
+              placeholder="Search by item name, Casio model, ID card, brand..."
               value={filterState.query}
               onChange={(e) => setFilterState(prev => ({ ...prev, query: e.target.value }))}
               className="w-full pl-10 pr-10 py-2.5 text-xs sm:text-sm bg-slate-50 rounded-xl border border-slate-200 focus:bg-white focus:border-brand-500 outline-none"
@@ -170,7 +170,7 @@ export const BrowseItems = () => {
           <div className="md:col-span-3 flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200">
             <button
               onClick={() => handleTypeChange('all')}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${
+              className={`flex-1 py-1.5 text-xs font-black rounded-lg transition-all ${
                 filterState.type === 'all' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600'
               }`}
             >
@@ -178,7 +178,7 @@ export const BrowseItems = () => {
             </button>
             <button
               onClick={() => handleTypeChange('lost')}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${
+              className={`flex-1 py-1.5 text-xs font-black rounded-lg transition-all ${
                 filterState.type === 'lost' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600'
               }`}
             >
@@ -186,7 +186,7 @@ export const BrowseItems = () => {
             </button>
             <button
               onClick={() => handleTypeChange('found')}
-              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${
+              className={`flex-1 py-1.5 text-xs font-black rounded-lg transition-all ${
                 filterState.type === 'found' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600'
               }`}
             >
@@ -199,14 +199,13 @@ export const BrowseItems = () => {
             <select
               value={filterState.sortBy}
               onChange={(e) => handleSortChange(e.target.value)}
-              className="flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none text-slate-700"
+              className="flex-1 px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none text-slate-700 font-semibold"
             >
               <option value="newest">Sort: Most Recent</option>
-              <option value="reward">Sort: Highest Reward</option>
+              <option value="reward">Sort: Cash Reward</option>
               <option value="urgency">Sort: High Urgency</option>
             </select>
 
-            {/* Grid / List Toggles */}
             <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200">
               <button
                 onClick={() => setFilterState(prev => ({ ...prev, viewMode: 'grid' }))}
@@ -227,19 +226,6 @@ export const BrowseItems = () => {
                 <List className="w-4 h-4" />
               </button>
             </div>
-
-            {/* Mobile Filter Trigger */}
-            <button
-              onClick={() => setMobileFilterOpen(true)}
-              className="lg:hidden p-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-700 relative"
-            >
-              <SlidersHorizontal className="w-4 h-4" />
-              {activeFilterCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
-                  {activeFilterCount}
-                </span>
-              )}
-            </button>
           </div>
 
         </div>
@@ -285,19 +271,19 @@ export const BrowseItems = () => {
       {/* Main Grid + Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        {/* Desktop Sidebar Filters */}
+        {/* Sidebar Filters */}
         <aside className="hidden lg:block lg:col-span-1 space-y-6">
           <div className="bg-white rounded-3xl border border-slate-200/80 p-5 shadow-soft space-y-6 sticky top-28">
             
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <Filter className="w-4 h-4 text-brand-600" />
-                <h3 className="text-sm font-bold text-slate-900">Filters</h3>
+                <h3 className="text-sm font-black text-slate-900">Campus Filters</h3>
               </div>
               {activeFilterCount > 0 && (
                 <button
                   onClick={resetFilters}
-                  className="text-xs text-brand-600 hover:underline flex items-center gap-1"
+                  className="text-xs text-brand-600 hover:underline flex items-center gap-1 font-bold"
                 >
                   <RotateCcw className="w-3 h-3" /> Reset
                 </button>
@@ -309,7 +295,7 @@ export const BrowseItems = () => {
               <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-amber-600" />
                 <div>
-                  <p className="text-xs font-bold text-amber-950">Reward Offered</p>
+                  <p className="text-xs font-black text-amber-950">Cash Reward</p>
                   <p className="text-[10px] text-amber-700">Show only items with cash rewards</p>
                 </div>
               </div>
@@ -323,7 +309,7 @@ export const BrowseItems = () => {
 
             {/* Categories */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+              <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2.5">
                 Category
               </label>
               <div className="space-y-1">
@@ -336,14 +322,14 @@ export const BrowseItems = () => {
                     <button
                       key={cat.id}
                       onClick={() => handleCategoryChange(cat.id)}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all ${
                         isSelected 
                           ? 'bg-brand-600 text-white shadow-xs' 
                           : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                       }`}
                     >
                       <span className="truncate">{cat.name}</span>
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                      <span className={`text-[10px] font-black px-1.5 py-0.5 rounded-full ${
                         isSelected ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
                       }`}>
                         {count}
@@ -354,17 +340,17 @@ export const BrowseItems = () => {
               </div>
             </div>
 
-            {/* Locations */}
+            {/* RIT Campus Locations */}
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
-                Location Area
+              <label className="block text-xs font-black text-slate-700 uppercase tracking-wider mb-2.5">
+                RIT Campus Zone
               </label>
               <select
                 value={filterState.location}
                 onChange={(e) => handleLocationChange(e.target.value)}
-                className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none text-slate-700"
+                className="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-brand-500 outline-none text-slate-700 font-semibold"
               >
-                <option value="all">All Campus & City Areas</option>
+                <option value="all">All RIT Campus Locations</option>
                 {LOCATIONS.map((loc) => (
                   <option key={loc} value={loc}>{loc}</option>
                 ))}
@@ -378,32 +364,31 @@ export const BrowseItems = () => {
         <main className="lg:col-span-3 space-y-6">
           <div className="flex items-center justify-between text-xs text-slate-500">
             <span>
-              Showing <strong className="text-slate-900">{filteredItems.length}</strong> items found
+              Showing <strong className="text-slate-900 font-black">{filteredItems.length}</strong> items logged across RIT
             </span>
           </div>
 
           {filteredItems.length === 0 ? (
-            /* Empty State */
             <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4 shadow-soft">
               <div className="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
                 <Search className="w-8 h-8" />
               </div>
-              <h3 className="text-lg font-bold text-slate-800">No Matching Items Found</h3>
+              <h3 className="text-lg font-black text-slate-800">No Matching Belongings Found</h3>
               <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto">
-                We couldn't find any lost or found items matching your exact filters. Try broadening your search or report a new lost item.
+                No reports match your selected criteria. Try selecting "All RIT Campus Locations" or submit a new report.
               </p>
               <div className="flex justify-center gap-3 pt-2">
                 <button
                   onClick={resetFilters}
                   className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
                 >
-                  Clear All Filters
+                  Clear Filters
                 </button>
                 <button
                   onClick={() => navigate('report-lost')}
                   className="px-4 py-2.5 rounded-xl text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 transition-colors"
                 >
-                  Report Lost Item
+                  Report Lost Property
                 </button>
               </div>
             </div>
